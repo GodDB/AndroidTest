@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">UnitTest</string>
+
+    <string name="click_complete">Click Complete!</string>
+    <string name="click_none">Click None!</string>
+</resources>
