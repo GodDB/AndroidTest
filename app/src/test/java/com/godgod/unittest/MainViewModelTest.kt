@@ -16,7 +16,6 @@ class MainViewModelTest {
     @get:Rule
     val instantExecutorRule = InstantTaskExecutorRule()
 
-
     @Test
     fun 뷰모델_클릭_검증() {
         //given
