@@ -8,6 +8,10 @@
         <import type="com.godgod.unittest.ClickState" />
 
         <variable
+            name="activity"
+            type="com.godgod.unittest.MainActivity" />
+
+        <variable
             name="vm"
             type="com.godgod.unittest.MainViewModel" />
     </data>
@@ -52,6 +56,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:text="@{vm.itemList.size() > 0 ? vm.itemList.get(0).name : null}"
+            />
+
+        <Button
+            android:id="@+id/btn3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:onClick="@{ () -> activity.onClickNext()}"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,7 @@ package com.godgod.unittest
 
 import com.godgod.unittest.db.AppDao
 import com.godgod.unittest.db.AppEntity
+import javax.inject.Inject
 
 interface AppDataSource {
 
@@ -10,7 +11,7 @@ interface AppDataSource {
     suspend fun insertAppData(appEntity: AppEntity)
 }
 
-class AppDataSourceImpl(private val dao : AppDao) : AppDataSource {
+class AppDataSourceImpl @Inject constructor(private val dao : AppDao) : AppDataSource {
     override suspend fun getDatas(): List<AppEntity> {
         return dao.getDatas()
     }

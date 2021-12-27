@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -40,6 +41,9 @@ android {
     testOptions.unitTests {
         includeAndroidResources = true
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -51,8 +55,13 @@ dependencies {
 
     //aac
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0"  //1.5.2 버전에 버그 있음.
+    implementation "com.google.dagger:hilt-android:2.35"
+    kapt "com.google.dagger:hilt-android-compiler:2.35"
 
     implementation "androidx.room:room-runtime:2.3.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
     kapt "androidx.room:room-compiler:2.3.0"
     implementation "androidx.room:room-ktx:2.3.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0"
@@ -63,23 +72,33 @@ dependencies {
     // unit test
     testImplementation 'junit:junit:4.+'
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0' //1.5.2 버전에 버그 있음.
-    testImplementation "org.jetbrains.kotlin:kotlin-test:1.5.20"
-    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:1.5.20"
+    testImplementation "org.jetbrains.kotlin:kotlin-test:1.5.0"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:1.5.0"
     // AndroidX Test - JVM testing
     testImplementation "androidx.arch.core:core-testing:2.1.0"
     testImplementation "org.robolectric:robolectric:4.5.1"
     testImplementation "androidx.test:core-ktx:1.4.0"
     testImplementation "androidx.test.ext:junit:1.1.3"
+    // hilt unit test(쓸일 있나...?)
+    // For Robolectric tests.
+    testImplementation 'com.google.dagger:hilt-android-testing:2.35'
+    // ...with Kotlin.
+    kaptTest 'com.google.dagger:hilt-android-compiler:2.35'
 
     // android test
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0'  //1.5.2 버전에 버그 있음.
-    androidTestImplementation "org.jetbrains.kotlin:kotlin-test:1.5.20"
-    androidTestImplementation "org.jetbrains.kotlin:kotlin-test-junit:1.5.20"
+    androidTestImplementation "org.jetbrains.kotlin:kotlin-test:1.5.0"
+    androidTestImplementation "org.jetbrains.kotlin:kotlin-test-junit:1.5.0"
     androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
     androidTestImplementation "androidx.room:room-testing:2.3.0"
     androidTestImplementation "androidx.test:core-ktx:1.4.0"
     implementation "androidx.test:core:1.4.0"
+    // hilt android test
+    // For instrumented tests.
+    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.35'
+    // ...with Kotlin.
+    kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.35'
 
 }

@@ -14,8 +14,8 @@ abstract class AppDataBase : RoomDatabase() {
             return INSTANCE ?: synchronized(AppDataBase::class.java) {
                 Room.databaseBuilder(context, AppDataBase::class.java, "db.sqlite3")
                     .build().also {
-                    INSTANCE = it
-                }
+                        INSTANCE = it
+                    }
             }
         }
 
@@ -40,7 +40,7 @@ interface AppDao {
 
 @Entity
 data class AppEntity(
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey
     val pk: Int,
     val name: String
 )

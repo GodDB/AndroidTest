@@ -5,11 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.godgod.unittest.db.AppEntity
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class MainViewModel(private val appDataSource: AppDataSource) : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(private val appDataSource: AppDataSource) : ViewModel() {
 
     private val _clickState: MutableLiveData<ClickState> = MutableLiveData(ClickState.None())
     val clickState: LiveData<ClickState>
