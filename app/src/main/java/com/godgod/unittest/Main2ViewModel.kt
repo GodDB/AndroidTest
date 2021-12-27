@@ -16,12 +16,12 @@ class Main2ViewModel @Inject constructor(private val appDataSource: AppDataSourc
     val items: LiveData<List<AppEntity>>
         get() = _items
 
-    private val _clickBtn1 : MutableLiveData<Boolean> = MutableLiveData(false)
-    val clickBtn1 : LiveData<Boolean>
+    private val _clickBtn1 : MutableLiveData<AppEntity> = MutableLiveData()
+    val clickBtn1 : LiveData<AppEntity>
     get() = _clickBtn1
 
-    private val _clickBtn2 : MutableLiveData<Boolean> = MutableLiveData(false)
-    val clickBtn2 : LiveData<Boolean>
+    private val _clickBtn2 : MutableLiveData<AppEntity> = MutableLiveData()
+    val clickBtn2 : LiveData<AppEntity>
         get() = _clickBtn2
 
     init {
@@ -30,11 +30,11 @@ class Main2ViewModel @Inject constructor(private val appDataSource: AppDataSourc
         }
     }
 
-    fun onClickBtn1() {
-        _clickBtn1.value = true
+    fun onClickBtn1(appEntity: AppEntity) {
+        _clickBtn1.value = appEntity
     }
 
-    fun onClickBtn2() {
-        _clickBtn2.value = true
+    fun onClickBtn2(appEntity: AppEntity) {
+        _clickBtn2.value = appEntity
     }
 }

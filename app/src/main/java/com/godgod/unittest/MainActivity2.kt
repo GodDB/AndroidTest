@@ -36,16 +36,20 @@ class MainActivity2 : AppCompatActivity() {
 
         binding.rv.adapter = Adapter(
             onClickBtn1 = {
-                viewModel.onClickBtn1()
+                viewModel.onClickBtn1(it)
             },
             onClickBtn2 = {
-                viewModel.onClickBtn2()
+                viewModel.onClickBtn2(it)
             }
         )
+
+        viewModel.items.observe(this) {
+            (binding.rv.adapter as Adapter).set(it)
+        }
     }
 }
 
-class Adapter(private val onClickBtn1: () -> Unit, private val onClickBtn2: () -> Unit) : RecyclerView.Adapter<TestViewHolder>() {
+class Adapter(private val onClickBtn1: (data : AppEntity) -> Unit, private val onClickBtn2: (data : AppEntity) -> Unit) : RecyclerView.Adapter<TestViewHolder>() {
 
     private val items: MutableList<AppEntity> = mutableListOf()
 
@@ -62,13 +66,19 @@ class Adapter(private val onClickBtn1: () -> Unit, private val onClickBtn2: () -
         return items.size
     }
 
+    fun set(items : List<AppEntity>) {
+        this.items.clear()
+        this.items.addAll(items)
+        notifyDataSetChanged()
+    }
+
 }
 
-class TestViewHolder(private val binding: ViewholderTestBinding, private val onClickBtn1: () -> Unit, private val onClickBtn2: () -> Unit) : RecyclerView.ViewHolder(binding.root) {
+class TestViewHolder(private val binding: ViewholderTestBinding, private val onClickBtn1: (data : AppEntity) -> Unit, private val onClickBtn2: (data : AppEntity) -> Unit) : RecyclerView.ViewHolder(binding.root) {
 
     init {
-        binding.testBtn1.setOnClickListener { onClickBtn1() }
-        binding.testBtn2.setOnClickListener { onClickBtn2() }
+        binding.testBtn1.setOnClickListener { onClickBtn1(binding.data ?: return@setOnClickListener) }
+        binding.testBtn2.setOnClickListener { onClickBtn2(binding.data ?: return@setOnClickListener) }
     }
 
     fun bind(appEntity: AppEntity) {
